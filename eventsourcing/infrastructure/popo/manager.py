@@ -1,6 +1,5 @@
 from eventsourcing.exceptions import RecordConflictError
 from eventsourcing.infrastructure.base import ACIDRecordManager
-from readerwriterlock import rwlock
 
 
 class PopoNotification(object):
@@ -14,6 +13,8 @@ class PopoNotification(object):
 
 class PopoRecordManager(ACIDRecordManager):
     def __init__(self, *args, **kwargs):
+        from readerwriterlock import rwlock
+
         super(PopoRecordManager, self).__init__(*args, **kwargs)
         self._all_sequence_records = {}
         self._all_sequence_max = {}
